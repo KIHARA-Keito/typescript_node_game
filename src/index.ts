@@ -1,6 +1,6 @@
 // 
 const printLine = (text: string, breakLine: boolean = true) => {
-  process.stdout.write(text + (breakLine ? '¥n' : ''))
+  process.stdout.write(text + (breakLine ? '\n' : ''))
 }
 
 // 
@@ -12,9 +12,9 @@ const promptInput = async(text: string) => {
 
 // 
 class HitAndBlow {
-  answerSource = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-  answer: string[] = []
-  tryCount = 0
+  private readonly answerSource = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+  private answer: string[] = []
+  private tryCount = 0
 
   setting() {
     const answerLength = 3
@@ -41,7 +41,7 @@ class HitAndBlow {
     }
   }
 
-  check(input: string[]) {
+  private check(input: string[]) {
     let hitCount = 0
     let blowCount = 0
     
@@ -58,6 +58,11 @@ class HitAndBlow {
       blow: blowCount,
     }
   }
+
+  end() {
+    printLine(`正解です！\n試行回数: ${this.tryCount}回`)
+    process.exit()
+  }
 }
 
 // 
@@ -65,6 +70,7 @@ class HitAndBlow {
   const hitAndBlow = new HitAndBlow()
   hitAndBlow.setting()
   await hitAndBlow.play()
+  hitAndBlow.end()
   /*
   const name = await promptInput('名前を入力して下さい')
   console.log(name)

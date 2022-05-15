@@ -1,3 +1,6 @@
+//
+type Mode = 'normal' | 'hard'
+
 // 
 const printLine = (text: string, breakLine: boolean = true) => {
   process.stdout.write(text + (breakLine ? '\n' : ''))
@@ -15,14 +18,14 @@ class HitAndBlow {
   private readonly answerSource = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
   private answer: string[] = []
   private tryCount = 0
-  private mode: 'normal' | 'hard'
+  private mode: Mode
 
-  constructor(mode: 'normal' | 'hard') {
+  constructor(mode: Mode) {
     this.mode = mode
   }
 
   setting() {
-    const answerLength = 3
+    const answerLength = this.getAnswerLength()
 
     while (this.answer.length < answerLength) {
       const randNum = Math.floor(Math.random() * this.answerSource.length)
@@ -34,7 +37,7 @@ class HitAndBlow {
   }
 
   async play() {
-    const inputArr = (await promptInput('「,」区切りで３つの数字を入力してください')).split(',')
+    const inputArr = (await promptInput(`「,」区切りで${this.getAnswerLength()}つの数字を入力してください`)).split(',')
     const result = this.check(inputArr)
 
     if(!this.validate(inputArr)) {
@@ -49,6 +52,19 @@ class HitAndBlow {
       await this.play()
     } else {
       this.tryCount += 1
+    }
+  }
+
+  private getAnswerLength() {
+    switch (this.mode) {
+      case 'normal':
+        return 3
+      case 'hard':
+        return 4
+      default:
+        // mode追加の場合の検知用
+        const neverValue: never = this.mode
+        throw new Error(`${this.mode}は無効なモードです`)
     }
   }
 
@@ -85,7 +101,7 @@ class HitAndBlow {
 
 // 
 ;(async() => {
-  const hitAndBlow = new HitAndBlow('normal')
+  const hitAndBlow = new HitAndBlow('hard')
   hitAndBlow.setting()
   await hitAndBlow.play()
   hitAndBlow.end()

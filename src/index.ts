@@ -1,5 +1,6 @@
 //
-type Mode = 'normal' | 'hard'
+const modes = ['normal','hard'] as const
+type Mode = typeof modes[number]
 
 // 
 const printLine = (text: string, breakLine: boolean = true) => {
@@ -42,7 +43,7 @@ class HitAndBlow {
   private mode: Mode = 'normal'
 
   async setting() {
-    this.mode = await promptSelect<Mode>('モードを入力してください', ['normal', 'hard'])
+    this.mode = await promptSelect<Mode>('モードを入力してください', modes)
     const answerLength = this.getAnswerLength()
 
     while (this.answer.length < answerLength) {

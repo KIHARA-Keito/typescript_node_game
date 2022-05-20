@@ -265,10 +265,4 @@ class Janken {
     'hb': new HitAndBlow(),
     'jk': new Janken(),
   }).start()
-  /*
-  const hitAndBlow = new HitAndBlow()
-  await hitAndBlow.setting()
-  await hitAndBlow.play()
-  hitAndBlow.end()
-  */
 })()

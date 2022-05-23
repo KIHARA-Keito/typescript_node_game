@@ -8,8 +8,7 @@ type NextAction = typeof nextActions[number]
 const gameTitles = ['hb','jk'] as const
 type GameTitle = typeof gameTitles[number]
 type GameStore = {
-  'hb': HitAndBlow
-  'jk': Janken
+  [key in GameTitle]: HitAndBlow | Janken
 }
 
 // 

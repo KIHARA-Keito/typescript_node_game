@@ -1,6 +1,25 @@
 # typescriptの練習　nodeでgame
 
-## 環境構築
+## 実行方法
+
+クローンしてローカルにて
+
+必要なモジュールインストール
+```terminal
+$ npm install
+```
+
+ビルド
+```terminal
+$ npm run build
+```
+
+ゲームスタート
+```terminal
+$ npm run start
+```
+
+## 作成手順1：環境構築
 
 任意のフォルダ作成して移動
 ```terminal
@@ -49,7 +68,7 @@ process.stdout.writeに変更→コンパイル？トランスパイルエラー
 $ npm i -D @types/node
 ```
 
-## githubに登録
+## 作成手順2：githubに登録
 
 結局クローンしてファイル配置した、、、
 ```terminal
